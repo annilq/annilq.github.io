@@ -542,35 +542,6 @@
   </entry>
   
   <entry>
-    <title><![CDATA[vue小记]]></title>
-    <link href="https://annilq.github.io/2016/10/14/vue/"/>
-    <id>https://annilq.github.io/2016/10/14/vue/</id>
-    <published>2016-10-14T13:28:01.000Z</published>
-    <updated>2017-11-29T12:34:25.000Z</updated>
-    <content type="html"><![CDATA[<ol>
-<li><p>首先通过构造函数传入vue实例的作用域el<br>在el上面查找所有的vue指令生成一个array</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">selector= <span class="built_in">Object</span>.keys(Directives).map(<span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'['</span> + prefix + <span class="string">'-'</span> + d + <span class="string">']'</span></span><br><span class="line">    &#125;).join()</span><br><span class="line">els  = root.querySelectorAll(selector)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>解析使用指令的dom的，返回一个object,里面包含指令所需的数据key,filter,update(）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"attr"</span>: attr,<span class="comment">//包含指令的key,value</span></span><br><span class="line">    <span class="string">"key"</span>: key,<span class="comment">//该directive依赖的外部数据</span></span><br><span class="line">    <span class="string">"filters"</span>: filters,<span class="comment">//model 用的filter</span></span><br><span class="line">    <span class="string">"definition"</span>: def,<span class="comment">//内部的directive name</span></span><br><span class="line">    <span class="string">"argument"</span>: arg,</span><br><span class="line">    <span class="comment">/*</span><br><span class="line">    如果指令名字是function，则使用function做为model change</span><br><span class="line">    handle，如果指令是一个对象，则使用对象自己实现的update做为model change</span><br><span class="line">    handle（所以每一个自定义指令都要实现update方法</span><br><span class="line">    */</span></span><br><span class="line">    <span class="string">"update"</span>: <span class="keyword">typeof</span> def === <span class="string">'function'</span> ? def: def.update</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>之后将dom中的指令标记删除恢复到普通的dom<br>并且整理出directive需要的key,<br>再将数据key与对应的directive生成一个依赖map(当key发生变化时会更新对应的directive)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">directive为以来此数据的指令，value为key实际的值</span><br><span class="line">*/</span></span><br><span class="line">&#123;</span><br><span class="line">	key:&#123;directive:[],value&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>最后设置当前key的setter与getter方法,在调用setter方法中设置当前数据对象的值并且依次调用依赖directive中的update方法实现view model的更新<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.defineProperty(seed.scope, key, &#123;</span><br><span class="line">        get: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> binding.value</span><br><span class="line">        &#125;,</span><br><span class="line">        set: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">            binding.value = value</span><br><span class="line">            binding.directives.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">directive</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (value &amp;&amp; directive.filters) &#123;</span><br><span class="line">                    value = applyFilters(value, directive)</span><br><span class="line">                &#125;</span><br><span class="line">                directive.update(</span><br><span class="line">                    directive.el,</span><br><span class="line">                    value,</span><br><span class="line">                    directive.argument,</span><br><span class="line">                    directive,</span><br><span class="line">                    seed</span><br><span class="line">                )</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<ol>
-<li><p>首先通过构造函数传入vue实例的作用域el<br>在el上面查找所有的vue指令生成一个array</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><s]]>
-    </summary>
-    
-      <category term="vue" scheme="https://annilq.github.io/tags/vue/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[用cordova命令行给应用程序签名]]></title>
     <link href="https://annilq.github.io/2016/01/07/Cordovarelease/"/>
     <id>https://annilq.github.io/2016/01/07/Cordovarelease/</id>
