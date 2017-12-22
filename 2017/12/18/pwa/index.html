@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="annilq"><title>PWA小计 · 小前风</title><meta name="description" content="PWA简介PWA （ Progressive Web Apps，渐进式网页应用）是由谷歌提出的新一代 Web 应用概念，旨在提供可靠、快速、类似 Native 应用的服务方案，PWA 正在迅速成为一套最佳实践。
+PWA涉及的技术点
+Service Worker
+Web 应用清单 manifest.j"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/logo.jpg" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo.jpg" style="width:240px;border-radius:100%"><h3 title=""><a href="/">小前风</a></h3></div></div><ul class="social-links"><li><a href="http://weibo.com/u/1800931304" target="_blank">微博</a></li><li><a href="https://github.com/annilq" target="_blank">Github</a></li><li><a href="https://www.zhihu.com/people/annilq" target="_blank">知乎</a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"></a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>PWA小计</a></h3></div><div class="post-content"><h3 id="PWA简介"><a href="#PWA简介" class="headerlink" title="PWA简介"></a>PWA简介</h3><p>PWA （ Progressive Web Apps，渐进式网页应用）是由谷歌提出的新一代 Web 应用概念，旨在提供可靠、快速、类似 Native 应用的服务方案，PWA 正在迅速成为一套最佳实践。</p>
+<h3 id="PWA涉及的技术点"><a href="#PWA涉及的技术点" class="headerlink" title="PWA涉及的技术点"></a>PWA涉及的技术点</h3><ul>
+<li>Service Worker</li>
+<li>Web 应用清单 manifest.json</li>
+</ul>
+<h3 id="Service-Worker"><a href="#Service-Worker" class="headerlink" title="Service Worker"></a>Service Worker</h3><p>Service workers 本质上充当Web应用程序与浏览器之间的代理服务器，也可以在网络可用时作为浏览器和网络间的代理。他们还允许访问推送通知和后台同步API。</p>
+<p>Service Worker的生命周期</p>
+<ul>
+<li>注册</li>
+<li>安装</li>
+<li>激活</li>
+</ul>
+<p>Service Worker的运行过程</p>
+<ul>
+<li>检查当前浏览器是否支持 Service Workers</li>
+<li>如果支持，注册 Service Worker 文件</li>
+<li>激活install事件(一般是被用来填充你的浏览器的离线缓存能力)<ul>
+<li>event.waitUntil() :这会确保Service Worker 不会在 waitUntil() 里面的代码执行完毕之前安装完成</li>
+</ul>
+</li>
+<li>激活activate事件</li>
+<li>开始监听fetch事件<ul>
+<li>event.respondWith() 劫持我们的 HTTP 响应，然后你用可以自定义Response更新他们。</li>
+</ul>
+</li>
+</ul>
+<h3 id="CacheStorage-api与-Cache-对象"><a href="#CacheStorage-api与-Cache-对象" class="headerlink" title="CacheStorage api与 Cache 对象"></a>CacheStorage api与 Cache 对象</h3><h4 id="CacheStorage-api"><a href="#CacheStorage-api" class="headerlink" title="CacheStorage api"></a>CacheStorage api</h4><ol>
+<li>caches.open() 打开一个Cache对象，返回一个 Promise对象，resolve的结果是一个Cache对象</li>
+<li>caches.keys() 删除一个Cache对象，返回一个 Promise对象，resolve的结果true则表示成功</li>
+<li>caches.delete() 返回一个 Promise对象，resolve的结果是一个Cache对象的数组</li>
+</ol>
+<h4 id="Cache-对象"><a href="#Cache-对象" class="headerlink" title="Cache 对象"></a>Cache 对象</h4><ol>
+<li>cache.match(request, options) 返回一个 Promise对象，resolve的结果是跟 Cache 对象匹配的第一个已经缓存的请求。</li>
+<li>cache.matchAll(request, options) 返回一个Promise 对象，resolve的结果是跟Cache对象匹配的所有请求组成的数组。</li>
+<li>cache.add(request) 抓取这个URL, 检索并把返回的response对象添加到给定的Cache对象.这在功能上等同于调用 fetch(), 然后使用 cache.put() 将response添加到cache中.</li>
+<li>cache.addAll(requests) 抓取一个URL数组，检索并把返回的response对象添加到给定的Cache对象。</li>
+<li>cache.put(request, response) 同时抓取一个请求及其响应，并将其添加到给定的cache。</li>
+<li>cache.delete(request, options) 搜索key值为request的Cache 条目。如果找到，则删除该Cache 条目，并且返回一个resolve为true的Promise对象；如果未找到，则返回一个resolve为false的Promise对象。</li>
+<li>cache.keys(request, options) 返回一个Promise对象，resolve的结果是Cache对象key值组成的数组。<blockquote>
+<ol>
+<li>Cache表示用于Request/Response对象对的存储，作为ServiceWorker生命周期的一部分被缓存。</li>
+<li>CacheStorage<br>表示Cache对象的存储。提供一个所有命名缓存的主目录，ServiceWorker可以访问并维护名字字符串到Cache对象的映射。</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<h4 id="代码中有注释"><a href="#代码中有注释" class="headerlink" title="代码中有注释"></a>代码中有注释</h4><p><a href="https://github.com/annilq/blog/tree/master/jscode/pwa/sw.js" target="_blank" rel="noopener">sw.js</a></p>
+<h3 id="Web-应用清单-manifest-json"><a href="#Web-应用清单-manifest-json" class="headerlink" title="Web 应用清单 manifest.json"></a>Web 应用清单 manifest.json</h3><ul>
+<li>name:用作当用户被提示安装应用时出现的文本。</li>
+<li>short_name :用作当应用安装后出现在用户主屏幕上的文本</li>
+<li>start_url :决定了当用户从设备的主屏幕开启 Web 应用时所出现的第一个页面。本章稍后会详细介绍。<br>根据构建的 Web 应用类型，你可能需要预设如何首次加载。display 字段表示开发者希望他们的 Web 应用如何向用户展示。本章稍后会详细介绍为什么这个字段如此重要。</li>
+<li>theme_color :可以对浏览器的地址栏进行着色，以符合网站的主色调。<br>icons 字段决定了当 Web 应用被添加到设备主屏幕时所显示的图标。</li>
+<li>background_color :name 和 background_color 属性用来显示启动页面</li>
+<li>display: 显示模式<ol>
+<li>Fullscreen - 打开 Web 应用并占用整个可用的显示区域。</li>
+<li>Standalone - 打开 Web 应用以看起来像一个独立的原生应用。此模式下，用户代理将排除诸如 URL 栏等标准浏览器 UI 元素，但可以包括诸如状态栏和系统返回按钮的其他系统 UI 元素。</li>
+<li>Minimal-ui - 此模式类似于 fullscreen，但为终端用户提供了可访问的最小 UI 元素集合，例如，后退按钮、前进按钮、重载按钮以及查看网页地址的一些方式。</li>
+<li>Browser - 使用操作系统内置的标准浏览器来打开 Web 应用。</li>
+</ol>
+</li>
+</ul>
+<p><a href="https://github.com/annilq/blog/tree/master/jscode/pwa/manifest.json" target="_blank" rel="noopener">manifest.json</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="http://sangka-z.com/PWA-Book-CN/" target="_blank" rel="noopener">Progressive Web Apps (PWA) 中文版</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/25800461" target="_blank" rel="noopener">PWA 在饿了么的实践经验</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/primers/service-workers/" target="_blank" rel="noopener">服务工作线程：简介</a></li>
+</ol>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-12-18</span><i class="fa fa-tag"></i><a href="/tags/PWA/" title="PWA" class="tag">PWA </a></div></div></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a role="navigation" href="/2017/12/07/serach/" title="javascript 搜索算法" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
