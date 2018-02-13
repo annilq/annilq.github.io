@@ -13,7 +13,7 @@ flask只提供restful"><meta name="keywords"><meta content="width=device-width, 
 <li>code说明<ol>
 <li>0 成功</li>
 <li>-1 错误</li>
-<li>-2 过期 </li>
+<li>-2 过期</li>
 </ol>
 </li>
 </ol>
@@ -38,9 +38,11 @@ flask只提供restful"><meta name="keywords"><meta content="width=device-width, 
 <h4 id="项目注意事项"><a href="#项目注意事项" class="headerlink" title="项目注意事项"></a>项目注意事项</h4><ol>
 <li>mongodb查询的返回值是bson数据结构,不能直接用<code>flask</code>的<code>jsonify</code>直接返回<ol>
 <li>需要自定义一个自定义一个方法将数据返回 <a href="https://github.com/annilq/python/blob/master/others/flask-server/util.py" target="_blank" rel="noopener">参考链接</a></li>
-<li>将查询数据中的<code>_id</code>由<code>ObjectId</code>格式转成<code>str</code>格式返回<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4></li>
+<li>将查询数据中的<code>_id</code>由<code>ObjectId</code>格式转成<code>str</code>格式返回</li>
 </ol>
 </li>
+</ol>
+<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><ol>
 <li><a href="http://api.mongodb.com/python/current/tutorial.html" target="_blank" rel="noopener">pymongo</a></li>
 <li><a href="http://flask-pymongo.readthedocs.io/en/latest/#flask_pymongo.PyMongo" target="_blank" rel="noopener">flask-pymongo</a></li>
 <li><a href="https://pythonhosted.org/Flask-Session/" target="_blank" rel="noopener">Flask-Session</a></li>
