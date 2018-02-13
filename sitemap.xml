@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://annilq.github.io/2018/02/13/python-todo/</loc>
+    
+    <lastmod>2018-02-13T10:21:19.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://annilq.github.io/2017/07/02/async/</loc>
     
     <lastmod>2018-02-01T12:50:05.000Z</lastmod>
@@ -51,13 +58,6 @@
   </url>
   
   <url>
-    <loc>https://annilq.github.io/2017/04/09/nodejs/</loc>
-    
-    <lastmod>2017-11-29T12:34:25.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://annilq.github.io/2016/10/15/emitter/</loc>
     
     <lastmod>2017-11-29T12:34:25.000Z</lastmod>
@@ -66,6 +66,13 @@
   
   <url>
     <loc>https://annilq.github.io/2017/09/28/generator/</loc>
+    
+    <lastmod>2017-11-29T12:34:25.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://annilq.github.io/2017/04/09/nodejs/</loc>
     
     <lastmod>2017-11-29T12:34:25.000Z</lastmod>
     
@@ -96,13 +103,6 @@
     <loc>https://annilq.github.io/2017/07/16/build-your-redux/</loc>
     
     <lastmod>2017-07-25T12:00:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://annilq.github.io/2017/07/08/python-todo/</loc>
-    
-    <lastmod>2017-07-20T14:37:59.000Z</lastmod>
     
   </url>
   
