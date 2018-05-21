@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://annilq.github.io/2018/05/04/react/</loc>
+    
+    <lastmod>2018-05-21T13:06:18.457Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://annilq.github.io/readme.html</loc>
     
     <lastmod>2018-05-21T13:01:33.720Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://annilq.github.io/2018/03/16/router/</loc>
     
     <lastmod>2018-05-21T13:01:33.720Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://annilq.github.io/2018/05/04/react/</loc>
-    
-    <lastmod>2018-05-21T13:01:33.718Z</lastmod>
     
   </url>
   
