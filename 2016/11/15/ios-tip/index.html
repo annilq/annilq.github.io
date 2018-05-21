@@ -15,11 +15,19 @@ drawRect初始化直接创建初始化子类并且加入到UIwindow中
 </li>
 </ol>
 <h5 id="视图控制器可以通过两种方式创建视图层次结构"><a href="#视图控制器可以通过两种方式创建视图层次结构" class="headerlink" title="视图控制器可以通过两种方式创建视图层次结构"></a>视图控制器可以通过两种方式创建视图层次结构</h5><ol>
-<li><p>代码方式：覆盖UIViewController中的loadView方法(如果当前controller的view属性未nil则自动调用loadview方法)</p>
-<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)loadView</span><br><span class="line">&#123;</span><br><span class="line">  someView *<span class="keyword">view</span>=[[someView alloc] init]<span class="comment">;</span></span><br><span class="line">  self.<span class="keyword">view</span>=<span class="keyword">view</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>代码方式：</p>
+<ol>
+<li>覆盖UIViewController中的loadView方法(如果当前controller的view属性未nil则自动调用loadview方法,向view中加入subview)</li>
+<li>覆盖UIViewController中的viewDidLoad方法(此时当前controller的view属性是一个空白的view,可以添加其他view)<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    [<span class="keyword">self</span> subViewsInit];</span><br><span class="line">&#125;</span><br><span class="line">  -(<span class="keyword">void</span>)loadView&#123;</span><br><span class="line">    someView *view=[[someView alloc] init];</span><br><span class="line">    <span class="keyword">self</span>.view=view;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>nib文件方式(相应的controller载入由nib编译撑的xib文件再生成视图)</p>
-<h5 id="将controller的view添加到主窗口"><a href="#将controller的view添加到主窗口" class="headerlink" title="将controller的view添加到主窗口"></a>将controller的view添加到主窗口</h5></li>
+</ol>
+</li>
+<li><p>nib文件方式</p>
+<ol>
+<li>会在需要显示视图时候默认由相应的controller自动载入同名的xib文件再生成视图</li>
+<li>手动载入指定的xib文件<h5 id="将controller的view添加到主窗口"><a href="#将controller的view添加到主窗口" class="headerlink" title="将controller的view添加到主窗口"></a>将controller的view添加到主窗口</h5></li>
+</ol>
+</li>
 <li>因为rootViewController的view需要启动后马上显示，所以会在设置完立刻加载view<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">somecontroller *<span class="built_in">con</span>=[[somecontroller alloc] init]</span><br><span class="line">self.<span class="built_in">window</span>.rootViewController=<span class="built_in">con</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -28,4 +36,5 @@ drawRect初始化直接创建初始化子类并且加入到UIwindow中
 <li><code>viewDidLoad</code>:当像访问视图对象时候可以访问，但只执行一次</li>
 <li><code>viewWillAppear</code>:每次看到view都会执行</li>
 </ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/q199109106q/article/details/8614044/" target="_blank" rel="noopener">loadView、viewDidLoad及viewDidUnload的关系</a></p>
 </div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2016-11-15</span><i class="fa fa-tag"></i><a href="/tags/iOS开发记录/" title="iOS开发记录" class="tag">iOS开发记录 </a></div></div></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a role="navigation" href="/2017/03/22/atom/" title="atom开发环境配置" class="btn">上一篇</a></li><li class="next pagbuttons"><a role="navigation" href="/2016/10/15/emitter/" title="简单的事件订阅发布" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
