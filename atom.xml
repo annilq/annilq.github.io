@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://annilq.github.io/"/>
-  <updated>2018-05-21T13:01:33.717Z</updated>
+  <updated>2018-05-22T15:09:01.760Z</updated>
   <id>https://annilq.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>UIView代实战技巧</title>
+    <link href="https://annilq.github.io/2018/05/22/uiview/"/>
+    <id>https://annilq.github.io/2018/05/22/uiview/</id>
+    <published>2018-05-22T13:08:21.000Z</published>
+    <updated>2018-05-22T15:09:01.760Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><p>UIView通过给UIView的layer新增layer来为UIView新增bolder</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CALayer *bottomBorder = [CALayer layer];</span><br><span class="line">   bottomBorder.frame =CGRectMake(0, userinput.frame.size.height , userinput.frame.size.width, 1);</span><br><span class="line">   bottomBorder.backgroundColor = bdcolor.CGColor;</span><br><span class="line">   [userinput.layer addSublayer:bottomBorder];</span><br></pre></td></tr></table></figure></li><li><p>在其他view controller中改变当前app 的rootViewcontroller</p><h4 id="问题来源"><a href="#问题来源" class="headerlink" title="问题来源"></a>问题来源</h4><p> 登录页面登录成功后需要将页面导航</p><h4 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h4><ol><li>最好的方式就是登录页面也用UINavigationController管理，通过获取</li><li>通过如下代码解决<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mainViewController *main=[[mainViewController alloc] init];</span><br><span class="line">UINavigationController *Maincon= [[UINavigationController alloc] initWithRootViewController:main];</span><br><span class="line">AppDelegate *app=[[UIApplication sharedApplication] delegate];</span><br><span class="line">app.window.rootViewController=Maincon;</span><br></pre></td></tr></table></figure></li></ol></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;UIView通过给UIView的layer新增layer来为UIView新增bolder&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=
+      
+    
+    </summary>
+    
+    
+      <category term="iOS,UIView" scheme="https://annilq.github.io/tags/iOS-UIView/"/>
+    
+  </entry>
   
   <entry>
     <title>React验证登录权限</title>
@@ -471,29 +496,6 @@
     
     
       <category term="atom" scheme="https://annilq.github.io/tags/atom/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iOS开发记录</title>
-    <link href="https://annilq.github.io/2016/11/15/ios-tip/"/>
-    <id>https://annilq.github.io/2016/11/15/ios-tip/</id>
-    <published>2016-11-15T11:43:21.000Z</published>
-    <updated>2018-05-21T13:01:33.714Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="UIview"><a href="#UIview" class="headerlink" title="UIview"></a>UIview</h3><h5 id="子类的模版会自动生成两个方法"><a href="#子类的模版会自动生成两个方法" class="headerlink" title="子类的模版会自动生成两个方法"></a>子类的模版会自动生成两个方法</h5><ol><li>initWithFrame</li><li>drawRect<br>初始化直接创建初始化子类并且加入到UIwindow中</li></ol><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Someview *<span class="built_in">view</span>=[[Someview alloc] initWithFrame:frame];</span><br><span class="line">[self.<span class="built_in">window</span> addsubview:<span class="built_in">view</span>];</span><br><span class="line">[self.<span class="built_in">window</span> makeKeyAndVisiable];</span><br></pre></td></tr></table></figure><h3 id="视图控制器UIViewController"><a href="#视图控制器UIViewController" class="headerlink" title="视图控制器UIViewController"></a>视图控制器UIViewController</h3><ol><li>每一个controller都有一个view属性作为这个controller的根视图</li><li>controller的默认初始化方法是<code>initWithNibName:bundle</code><br>当像controller发送init消息时候会自动调用<code>initWithNibName:bundle</code>方法并且参数传入nil<blockquote><p>当传入了nil时controller对象仍然会找和当前controller同名xib文件</p></blockquote></li></ol><h5 id="视图控制器可以通过两种方式创建视图层次结构"><a href="#视图控制器可以通过两种方式创建视图层次结构" class="headerlink" title="视图控制器可以通过两种方式创建视图层次结构"></a>视图控制器可以通过两种方式创建视图层次结构</h5><ol><li><p>代码方式：</p><ol><li>覆盖UIViewController中的loadView方法(如果当前controller的view属性未nil则自动调用loadview方法,向view中加入subview)</li><li>覆盖UIViewController中的viewDidLoad方法(此时当前controller的view属性是一个空白的view,可以添加其他view)<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    [<span class="keyword">self</span> subViewsInit];</span><br><span class="line">&#125;</span><br><span class="line">  -(<span class="keyword">void</span>)loadView&#123;</span><br><span class="line">    someView *view=[[someView alloc] init];</span><br><span class="line">    <span class="keyword">self</span>.view=view;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol></li><li><p>nib文件方式</p><ol><li>会在需要显示视图时候默认由相应的controller自动载入同名的xib文件再生成视图</li><li>手动载入指定的xib文件<h5 id="将controller的view添加到主窗口"><a href="#将controller的view添加到主窗口" class="headerlink" title="将controller的view添加到主窗口"></a>将controller的view添加到主窗口</h5></li></ol></li><li>因为rootViewController的view需要启动后马上显示，所以会在设置完立刻加载view<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">somecontroller *<span class="built_in">con</span>=[[somecontroller alloc] init]</span><br><span class="line">self.<span class="built_in">window</span>.rootViewController=<span class="built_in">con</span>;</span><br></pre></td></tr></table></figure></li></ol><h5 id="controller中的方法简介"><a href="#controller中的方法简介" class="headerlink" title="controller中的方法简介"></a>controller中的方法简介</h5><ol><li><code>initWithBundle</code>:当对视图控制器属性初始化时可以，还不能访问视图对象</li><li><code>viewDidLoad</code>:当像访问视图对象时候可以访问，但只执行一次</li><li><code>viewWillAppear</code>:每次看到view都会执行</li></ol><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/q199109106q/article/details/8614044/" target="_blank" rel="noopener">loadView、viewDidLoad及viewDidUnload的关系</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;UIview&quot;&gt;&lt;a href=&quot;#UIview&quot; class=&quot;headerlink&quot; title=&quot;UIview&quot;&gt;&lt;/a&gt;UIview&lt;/h3&gt;&lt;h5 id=&quot;子类的模版会自动生成两个方法&quot;&gt;&lt;a href=&quot;#子类的模版会自动生成两个方法&quot; class=&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="iOS开发记录" scheme="https://annilq.github.io/tags/iOS%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/"/>
     
   </entry>
   
