@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://annilq.github.io/"/>
-  <updated>2018-06-05T14:49:51.584Z</updated>
+  <updated>2018-06-05T14:51:59.992Z</updated>
   <id>https://annilq.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://annilq.github.io/2018/05/22/uiview/"/>
     <id>https://annilq.github.io/2018/05/22/uiview/</id>
     <published>2018-05-22T13:08:21.000Z</published>
-    <updated>2018-06-05T14:49:51.584Z</updated>
+    <updated>2018-06-05T14:51:59.992Z</updated>
     
     <content type="html"><![CDATA[<ol><li><p>各个组件默认高度</p><ol><li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    2. ```navigationbar``` :44</span><br><span class="line">    3. ```UISegmentedControl``` :44</span><br><span class="line">    4. ```tabbar``` :49</span><br><span class="line"></span><br><span class="line">2. UIView通过给UIView的layer新增layer来为UIView新增bolder</span><br><span class="line">```objective-c</span><br><span class="line"> CALayer *bottomBorder = [CALayer layer];</span><br><span class="line">    bottomBorder.frame =CGRectMake(0, userinput.frame.size.height , userinput.frame.size.width, 1);</span><br><span class="line">    bottomBorder.backgroundColor = bdcolor.CGColor;</span><br><span class="line">    [userinput.layer addSublayer:bottomBorder];</span><br></pre></td></tr></table></figure></li></ol></li><li><p>在其他view controller中改变当前app 的rootViewcontroller</p><ol><li>通过如下代码解决<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mainViewController *main=[[mainViewController alloc] init];</span><br><span class="line">UINavigationController *Maincon= [[UINavigationController alloc] initWithRootViewController:main];</span><br><span class="line">AppDelegate *app=[[UIApplication sharedApplication] delegate];</span><br><span class="line">app.window.rootViewController=Maincon;</span><br></pre></td></tr></table></figure></li></ol></li></ol>]]></content>
     
