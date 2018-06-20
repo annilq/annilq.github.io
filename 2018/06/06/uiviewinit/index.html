@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="annilq"><title>UIview的控件及属性 · 小前风</title><meta name="description" content="UIview子类的模版会自动生下面方法
+initWithFrame初始化直接创建初始化子类并且加入到UIwindow中
+
+123Someview *view=[[Someview alloc] initWithFrame:frame];[self.window addsubview:view];[s"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/logo.jpg" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo.jpg" style="width:240px;border-radius:100%"><h3 title=""><a href="/">小前风</a></h3></div></div><ul class="social-links"><li><a href="http://weibo.com/u/1800931304" target="_blank">微博</a></li><li><a href="https://github.com/annilq" target="_blank">Github</a></li><li><a href="https://www.zhihu.com/people/annilq" target="_blank">知乎</a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"></a></li></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>UIview的控件及属性</a></h3></div><div class="post-content"><h3 id="UIview"><a href="#UIview" class="headerlink" title="UIview"></a>UIview</h3><h5 id="子类的模版会自动生下面方法"><a href="#子类的模版会自动生下面方法" class="headerlink" title="子类的模版会自动生下面方法"></a>子类的模版会自动生下面方法</h5><ol>
+<li>initWithFrame<br>初始化直接创建初始化子类并且加入到UIwindow中</li>
+</ol>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Someview *<span class="built_in">view</span>=[[Someview alloc] initWithFrame:frame];</span><br><span class="line">[self.<span class="built_in">window</span> addsubview:<span class="built_in">view</span>];</span><br><span class="line">[self.<span class="built_in">window</span> makeKeyAndVisiable];</span><br></pre></td></tr></table></figure>
+<h3 id="视图控制器UIViewController"><a href="#视图控制器UIViewController" class="headerlink" title="视图控制器UIViewController"></a>视图控制器UIViewController</h3><ol>
+<li>每一个controller都有一个view属性作为这个controller的根视图</li>
+<li>controller的默认初始化方法是<code>initWithNibName:bundle</code><br>当像controller发送init消息时候会自动调用<code>initWithNibName:bundle</code>方法并且参数传入nil<blockquote>
+<p>当传入了nil时controller对象仍然会找和当前controller同名xib文件</p>
+</blockquote>
+</li>
+</ol>
+<h5 id="视图控制器可以通过两种方式创建视图层次结构"><a href="#视图控制器可以通过两种方式创建视图层次结构" class="headerlink" title="视图控制器可以通过两种方式创建视图层次结构"></a>视图控制器可以通过两种方式创建视图层次结构</h5><ol>
+<li><p>代码方式：</p>
+<ol>
+<li>覆盖UIViewController中的loadView方法(如果当前controller的view属性未nil则自动调用loadview方法,向view中加入subview)</li>
+<li>覆盖UIViewController中的viewDidLoad方法(此时当前controller的view属性是一个空白的view,可以添加其他view)<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  - (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    [<span class="keyword">self</span> subViewsInit];</span><br><span class="line">&#125;</span><br><span class="line">  -(<span class="keyword">void</span>)loadView&#123;</span><br><span class="line">    someView *view=[[someView alloc] init];</span><br><span class="line">    <span class="keyword">self</span>.view=view;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>nib文件方式</p>
+<ol>
+<li>会在需要显示视图时候默认由相应的controller自动载入同名的xib文件再生成视图</li>
+<li>手动载入指定的xib文件<h5 id="将controller的view添加到主窗口"><a href="#将controller的view添加到主窗口" class="headerlink" title="将controller的view添加到主窗口"></a>将controller的view添加到主窗口</h5></li>
+</ol>
+</li>
+<li>因为rootViewController的view需要启动后马上显示，所以会在设置完立刻加载view<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">somecontroller *<span class="built_in">con</span>=[[somecontroller alloc] init]</span><br><span class="line">self.<span class="built_in">window</span>.rootViewController=<span class="built_in">con</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="controller中的方法简介"><a href="#controller中的方法简介" class="headerlink" title="controller中的方法简介"></a>controller中的方法简介</h5><ol>
+<li><code>initWithBundle</code>:当对视图控制器属性初始化时可以，还不能访问视图对象</li>
+<li><code>viewDidLoad</code>:当像访问视图对象时候可以访问，但只执行一次</li>
+<li><code>viewWillAppear</code>:每次看到view都会执行</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://blog.csdn.net/q199109106q/article/details/8614044/" target="_blank" rel="noopener">loadView、viewDidLoad及viewDidUnload的关系</a></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-06-06</span><i class="fa fa-tag"></i><a href="/tags/iOS/" title="iOS" class="tag">iOS </a></div></div></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a role="navigation" href="/2018/05/21/react-auth/" title="React验证登录权限" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

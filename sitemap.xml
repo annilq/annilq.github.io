@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://annilq.github.io/2018/05/22/uiview/</loc>
+    <loc>https://annilq.github.io/2018/06/06/uiviewinit/</loc>
     
-    <lastmod>2018-06-05T14:54:02.976Z</lastmod>
+    <lastmod>2018-06-20T15:31:51.168Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://annilq.github.io/readme.html</loc>
     
-    <lastmod>2018-05-23T11:48:38.948Z</lastmod>
+    <lastmod>2018-06-20T15:31:51.168Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://annilq.github.io/2016/11/15/ios-tips/</loc>
+    
+    <lastmod>2018-06-20T15:31:51.168Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://annilq.github.io/2018/01/31/ajax/</loc>
+    
+    <lastmod>2018-06-05T14:57:03.931Z</lastmod>
     
   </url>
   
@@ -44,13 +58,6 @@
   </url>
   
   <url>
-    <loc>https://annilq.github.io/2016/11/15/ios-tip/</loc>
-    
-    <lastmod>2018-05-21T13:01:33.714Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://annilq.github.io/2017/09/28/generator/</loc>
     
     <lastmod>2018-05-21T13:01:33.711Z</lastmod>
@@ -68,13 +75,6 @@
     <loc>https://annilq.github.io/2017/10/11/Promise/</loc>
     
     <lastmod>2018-05-21T13:01:33.708Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://annilq.github.io/2018/01/31/ajax/</loc>
-    
-    <lastmod>2018-03-19T12:10:27.000Z</lastmod>
     
   </url>
   
